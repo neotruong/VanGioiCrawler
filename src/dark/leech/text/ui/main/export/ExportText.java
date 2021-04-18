@@ -47,7 +47,7 @@
 /*  47 */     this.progressBar = new JMProgressBar();
 /*     */ 
 /*     */     
-/*  50 */     this.pnTitle.setText("Xuất Text");
+/*  50 */     this.pnTitle.setText("Cào truyện về Vạn Giới");
 /*  51 */     this.pnTitle.addCloseListener(new ActionListener()
 /*     */         {
 /*     */           public void actionPerformed(ActionEvent e) {

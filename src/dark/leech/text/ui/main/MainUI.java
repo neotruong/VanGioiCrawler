@@ -190,12 +190,12 @@ public class MainUI extends JFrame implements BlurListener, ActionListener {
     this.appBar.add((Component)this.btAdd);
     this.btAdd.setBounds(305, 5, 45, 45);
     JLabel logo = new JLabel();
-    logo.setText("Leech Text");
+    logo.setText("VanGioi.vn - Cào truyện");
     logo.setFont(FontUtils.TITLE_BIG);
     logo.setForeground(Color.white);
     logo.setHorizontalAlignment(0);
     this.appBar.add(logo);
-    logo.setBounds(20, 0, (logo.getPreferredSize()).width, 55);
+    logo.setBounds(20, 0, (logo.getPreferredSize()).width + 50, 55);
     this.btMenu = new CircleButton(StringUtils.MORE, 25f);
     this.btMenu.addActionListener(this);
     this.appBar.add((Component)this.btMenu);
