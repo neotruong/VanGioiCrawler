@@ -202,8 +202,7 @@
 /* 202 */         .title(this.properties.getName())
 /* 203 */         .content("Đã tạo ebook xong!")
 /* 204 */         .path(this.properties.getSavePath() + "/data/cover.jpg")
-/* 205 */         .delay(10000)
-/* 206 */         .open();
+/* 205 */         .delay(10000);
 /* 207 */       close();
 /*     */     } 
 /*     */   }

@@ -116,7 +116,7 @@
 		/* 115 */       .content("Đã xuất text xong!")
 		/* 116 */       .path(this.properties.getSavePath() + "/data/cover.jpg")
 		/* 117 */       .delay(10000)
-		/* 118 */       .open();
+		/* 118 */       .processCallPost();
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

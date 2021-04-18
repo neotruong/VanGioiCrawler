@@ -8,18 +8,25 @@ import dark.leech.text.action.export.Text;
 /*     */ import java.awt.Component;
 /*     */ import java.awt.Container;
 /*     */ import java.awt.LayoutManager;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 /*     */ import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 /*     */ import java.text.DateFormat;
 /*     */ import java.text.SimpleDateFormat;
+import java.util.Base64;
 /*     */ import java.util.Date;
 
+import javax.imageio.ImageIO;
 import javax.net.ssl.HttpsURLConnection;
 /*     */ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,7 +34,9 @@ import javax.swing.JOptionPane;
 /*     */ import javax.swing.SwingUtilities;
 /*     */ import javax.swing.border.LineBorder;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.zeroturnaround.zip.commons.IOUtils;
 /*     */ 
 /*     */ public class Notification
 /*     */   extends JWindow
@@ -113,10 +122,14 @@ import org.json.JSONObject;
 /*     */   }
 /*     */ 
 /*     */   
-/*     */   public void open() throws Exception {
+/*     */   public void processCallPost() throws Exception {
 				if(Text.chapArray.length() != 0) { 
 					
-					finalJson.put("listchap",Text.chapArray);
+					finalJson.put("listChaps",Text.chapArray);
+					imageStream = new FileInputStream(this.imagePath);
+					byte[] imgByte = IOUtils.toByteArray(imageStream);
+					String base64 = Base64.getEncoder().encodeToString(imgByte);
+					finalJson.put("img", "data:image/jpg;base64,"+base64);
 					sendPost();
 				}
 				
@@ -128,29 +141,33 @@ import org.json.JSONObject;
 	// HTTP POST request
 		public static void sendPost() throws Exception {
 		
-		 String url = "http://vangioi.vn/api/crawler";
+		 String url = "https://vangioi.vn/api/crawler";
+//		 String url = "http://localhost:8080/web_truyen/api/crawler";
 		 URL obj = new URL(url);
 		 HttpURLConnection   con = (HttpURLConnection ) obj.openConnection();
 		 con.setRequestMethod("POST");
 		
 		
 		 con.setRequestProperty("User-Agent", USER_AGENT);
-		
+		 con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 		 con.setRequestProperty("Accept", "application/json");
-		 con.setRequestProperty("Authorization","Bearer "+" A3HbzO6K5nf8P81TNzOtDrgSBJ4KKHTpw1BqFaSoOZzJLbxizTuDH78OqMcn");
+		 con.setRequestProperty("Authorization","Bearer Sq1OdeXbWKfOENLYtlbmH8AiMGmyXqhpA9T4wckH7YAlFtuEhjtDRm6t3wWn");
 	
 		 String jsonInputString = Notification.finalJson.toString();
 		 // Send post request
+		 con.setDoInput(true);
 		 con.setDoOutput(true);
-		 DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-		 wr.writeBytes(jsonInputString);
-		 wr.flush();
-		 wr.close();
+//		 OutputStreamWriter wr= new OutputStreamWriter(con.getOutputStream());
+//		 wr.write(jsonInputString);
 		
+		 OutputStream os = con.getOutputStream();
+		 os.write(jsonInputString.getBytes("UTF-8"));
+		 
 		 int responseCode = con.getResponseCode();
 		 System.out.println("\nSending 'POST' request to URL : " + url);
 		 System.out.println("Response Code : " + responseCode);
 		
+
 		 BufferedReader in = new BufferedReader(
 		         new InputStreamReader(con.getInputStream()));
 		 String inputLine;
@@ -160,7 +177,9 @@ import org.json.JSONObject;
 		  response.append(inputLine);
 		 }
 		 in.close();
-		 
+		finalJson.remove("listChaps");
+		Text.chapArray = new JSONArray();
+		System.out.print(finalJson);
 		 //print result
 		 System.out.println(response.toString());
 		 JOptionPane.showMessageDialog(null, "Cào truyện hoàn tất! vui lòng kiểm tra tại website");
