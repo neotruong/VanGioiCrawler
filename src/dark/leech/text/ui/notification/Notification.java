@@ -141,9 +141,9 @@ import org.zeroturnaround.zip.commons.IOUtils;
 	// HTTP POST request
 		public static void sendPost() throws Exception {
 		
-		 String url_production = "http://vangioi.vn/api/crawler";
-		 String url = "http://localhost:8080/web_truyen/api/crawler";
-		 URL obj = new URL(url);
+		 String url_production = "https://vangioi.vn/api/crawler";
+//		 String url = "http://localhost:8080/web_truyen/api/crawler";
+		 URL obj = new URL(url_production);
 		 HttpURLConnection   con = (HttpURLConnection ) obj.openConnection();
 		 con.setRequestMethod("POST");
 		
