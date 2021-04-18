@@ -1,0 +1,2 @@
+Windows: Double click to LeechText.exe to run
+Linux: Open Terminal and ./LeechText.sh to run.
