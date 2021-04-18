@@ -118,8 +118,7 @@
 /* 118 */       .title(this.properties.getName())
 /* 119 */       .content("Đã gettext xong!")
 /* 120 */       .path(this.properties.getSavePath() + "/data/cover.jpg")
-/* 121 */       .delay(5000)
-/* 122 */       .open();
+/* 121 */       .delay(5000);
 /*     */   }
 /*     */ 
 /*     */ 
