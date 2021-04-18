@@ -141,9 +141,9 @@ import org.zeroturnaround.zip.commons.IOUtils;
 	// HTTP POST request
 		public static void sendPost() throws Exception {
 		
-		 String url_production = "https://vangioi.vn/api/crawler";
+		 String url = "https://vangioi.vn/api/crawler";
 //		 String url = "http://localhost:8080/web_truyen/api/crawler";
-		 URL obj = new URL(url_production);
+		 URL obj = new URL(url);
 		 HttpURLConnection   con = (HttpURLConnection ) obj.openConnection();
 		 con.setRequestMethod("POST");
 		
@@ -151,7 +151,7 @@ import org.zeroturnaround.zip.commons.IOUtils;
 		 con.setRequestProperty("User-Agent", USER_AGENT);
 		 con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 		 con.setRequestProperty("Accept", "application/json");
-		 con.setRequestProperty("Authorization","Bearer A3HbzO6K5nf8P81TNzOtDrgSBJ4KKHTpw1BqFaSoOZzJLbxizTuDH78OqMcn");
+		 con.setRequestProperty("Authorization","Bearer Sq1OdeXbWKfOENLYtlbmH8AiMGmyXqhpA9T4wckH7YAlFtuEhjtDRm6t3wWn");
 	
 		 String jsonInputString = Notification.finalJson.toString();
 		 // Send post request
